@@ -2,14 +2,11 @@
   <div id="app">
     <el-container>
       <el-aside width="200px">
-        <router-view name="aside" />
+        <router-view id="aside" name="aside" />
       </el-aside>
-      <el-container>
-        <header-nav />
-        <el-main>
-          <router-view name="main" />
-        </el-main>
-        <el-footer>Footer</el-footer>
+      <el-container direction="vertical">
+          <header-nav />
+        <router-view id="main" name="main" />
       </el-container>
     </el-container>
   </div>
@@ -19,15 +16,19 @@
 .haeder-nav {
   text-align: center;
   line-height: 60px;
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .el-footer {
+  position: absolute;
+  bottom: 0;
+  height: 60px; /*脚部的高度*/
   background-color: rgb(224, 234, 245);
   color: #333;
   text-align: center;
   line-height: 60px;
+  clear: both;
 }
 
 .el-aside {
@@ -35,13 +36,11 @@
   color: #333;
   text-align: center;
   line-height: 200px;
+  height: 100%;
 }
 
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
+#main {
+  padding-top: 20px;
 }
 
 body > .el-container {
