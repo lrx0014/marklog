@@ -1,33 +1,53 @@
 <template>
   <div>
-    <div id="logo">
-      MarkLog
-    </div>
-    <el-tree
-      :data="data"
-      node-key="id"
-      default-expand-all
-      @node-drag-start="handleDragStart"
-      @node-drag-enter="handleDragEnter"
-      @node-drag-leave="handleDragLeave"
-      @node-drag-over="handleDragOver"
-      @node-drag-end="handleDragEnd"
-      @node-drop="handleDrop"
-      draggable
-      :allow-drop="allowDrop"
-      :allow-drag="allowDrag"
-    ></el-tree>
+    <el-row>
+      <el-col :span="3">
+        <el-tree
+          :data="data"
+          node-key="id"
+          default-expand-all
+          @node-drag-start="handleDragStart"
+          @node-drag-enter="handleDragEnter"
+          @node-drag-leave="handleDragLeave"
+          @node-drag-over="handleDragOver"
+          @node-drag-end="handleDragEnd"
+          @node-drop="handleDrop"
+          draggable
+          :allow-drop="allowDrop"
+          :allow-drag="allowDrag"
+        ></el-tree>
+      </el-col>
+      <el-col :span="21">
+        <div id="editor">
+          <el-container direction="horizontal">
+            <div id="tips">
+              <font size="5">撰写新文章</font>
+            </div>
+            <div id="btns">
+              <el-button type="primary" @click="submit" id="save-btn" round>保存为草稿</el-button>
+              <el-button type="warning" @click="submit" id="publish-btn" round>立即发表</el-button>
+            </div>
+          </el-container>
+          <mavon-editor v-model="content" ref="md" @change="change" style="min-height: 600px" />
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <style>
-#logo {
-  height: 60px;
-  background-color: rgb(74, 82, 89);
-}
-
 .el-tree {
   height: auto;
+}
+#tips {
+  margin-left: 10px;
+  width: 100%;
+}
+#btns {
+  width: 100%;
+  text-align: right;
+  margin: 0px auto 0px auto;
+  margin-bottom: 10px;
 }
 </style>
 
@@ -111,12 +131,14 @@ export default {
               label: "垃圾文章2"
             }
           ]
-        },
+        }
       ],
       defaultProps: {
         children: "children",
         label: "label"
-      }
+      },
+      content: "", // 输入的markdown
+      html: "" // 及时转的html
     };
   },
   methods: {
@@ -147,6 +169,16 @@ export default {
     },
     allowDrag(draggingNode) {
       return draggingNode.data.label.indexOf("三级 3-2-2") === -1;
+    },
+    // 所有操作都会被解析重新渲染
+    change(value, render) {
+      // render 为 markdown 解析后的结果[html]
+      this.html = render;
+    },
+    // 提交
+    submit() {
+      console.log(this.content);
+      console.log(this.html);
     }
   }
 };

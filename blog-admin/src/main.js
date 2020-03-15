@@ -8,14 +8,15 @@ import 'element-ui/lib/theme-chalk/index.css';
 import mavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
 import HeaderNav from '@/components/header/HeaderNav';
+import Logo from '@/components/logo/Logo';
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 Vue.use(mavonEditor);
-Vue.use(HeaderNav);
 
 Vue.component('header-nav', HeaderNav);
+Vue.component('logo', Logo);
 
 /* eslint-disable no-new */
 new Vue({
