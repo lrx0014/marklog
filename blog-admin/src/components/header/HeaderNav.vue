@@ -7,18 +7,18 @@
       </el-col>
       <el-col :span=21>
         <el-menu
-          :default-active="activeIndex2"
+          :default-active="defaultActive"
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
+          router
         >
-          <el-menu-item index="1">创作中心</el-menu-item>
-          <el-menu-item index="2">发表管理</el-menu-item>
-          <el-menu-item index="3">消息中心</el-menu-item>
-          <el-menu-item index="4">系统设置</el-menu-item>
+          <el-menu-item index="/writer">创作中心</el-menu-item>
+          <el-menu-item index="/publisher">发表管理</el-menu-item>
+          <el-menu-item index="/setting">系统设置</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>
@@ -29,13 +29,12 @@
 export default {
   data() {
     return {
-      activeIndex: "1",
-      activeIndex2: "1"
+      defaultActive: this.$route.path
     };
   },
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      console.log(this.$route.path)
     }
   }
 };

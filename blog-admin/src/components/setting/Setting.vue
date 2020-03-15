@@ -5,16 +5,21 @@
         <el-menu
           :default-active="defaultActive"
           class="el-menu-vertical-demo"
-          @select="handleSelect"
+          @open="handleOpen"
+          @close="handleClose"
           router
         >
-          <el-menu-item index="/publisher/articles">
+          <el-menu-item index="/setting/general">
             <i class="el-icon-menu"></i>
-            <span slot="title">已发表文章</span>
+            <span slot="title">常规</span>
           </el-menu-item>
-          <el-menu-item index="/publisher/analyse">
+          <el-menu-item index="/setting/account">
             <i class="el-icon-document"></i>
-            <span slot="title">质量分析</span>
+            <span slot="title">账户</span>
+          </el-menu-item>
+          <el-menu-item index="/setting/backup" disabled>
+            <i class="el-icon-setting"></i>
+            <span slot="title">备份</span>
           </el-menu-item>
         </el-menu>
       </el-col>
@@ -30,11 +35,14 @@ export default {
   data() {
     return {
       defaultActive: this.$route.path
-    };
+    }
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(this.$route.path);
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     }
   }
 };
